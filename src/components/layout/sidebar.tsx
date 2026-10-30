@@ -62,7 +62,7 @@ export function Sidebar() {
 
     return (
         <aside className="hidden h-screen w-64 flex-col border-r bg-white p-4 md:flex">
-            <div className="flex items-center gap-2 px-2 py-4">
+            <div className="flex flex-col items-start gap-1.5 px-2 py-3">
                 <NextImage
                     src="/logo.png"
                     alt="DCAS Logo"
@@ -71,6 +71,9 @@ export function Sidebar() {
                     className="h-10 w-auto object-contain"
                     priority
                 />
+                <span className="inline-flex items-center rounded-full bg-emerald-50 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-emerald-700 border border-emerald-200">
+                    PRD
+                </span>
             </div>
 
             <nav className="flex-1 space-y-2 py-6">

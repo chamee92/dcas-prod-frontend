@@ -34,15 +34,18 @@ export function MobileSidebar() {
             <Button variant="ghost" size="icon" onClick={() => setIsOpen(true)}>
                 <Menu className="h-6 w-6" />
             </Button>
-            <div className="ml-2">
+            <div className="ml-2 flex flex-col items-start gap-0.5">
                 <NextImage
                     src="/logo.png"
                     alt="DCAS Logo"
                     width={120}
                     height={40}
-                    className="h-8 w-auto object-contain"
+                    className="h-7 w-auto object-contain"
                     priority
                 />
+                <span className="inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-emerald-700 border border-emerald-200">
+                    PRD
+                </span>
             </div>
 
             {isOpen && (
@@ -56,7 +59,7 @@ export function MobileSidebar() {
                     {/* Drawer */}
                     <div className="relative flex w-64 flex-col bg-white p-4 shadow-xl animate-in slide-in-from-left duration-300">
                         <div className="flex items-center justify-between mb-6">
-                            <div className="flex items-center gap-2">
+                            <div className="flex flex-col items-start gap-1">
                                 <NextImage
                                     src="/logo.png"
                                     alt="DCAS Logo"
@@ -65,6 +68,9 @@ export function MobileSidebar() {
                                     className="h-8 w-auto object-contain"
                                     priority
                                 />
+                                <span className="inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-emerald-700 border border-emerald-200">
+                                    PRD
+                                </span>
                             </div>
                             <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}>
                                 <X className="h-5 w-5" />

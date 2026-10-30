@@ -92,7 +92,7 @@ export default function LoginPage() {
                     <div className="mx-auto w-full max-w-md space-y-6">
                         {/* Logo Header */}
                         <div className="flex flex-col items-center space-y-2 text-center">
-                            <div className="relative w-44 h-14 mb-2">
+                            <div className="relative w-44 h-14 mb-1">
                                 <Image
                                     src="/logo.png"
                                     alt="DCAS Logo"
@@ -101,6 +101,9 @@ export default function LoginPage() {
                                     priority
                                 />
                             </div>
+                            <span className="inline-flex items-center rounded-full bg-emerald-50 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-emerald-700 border border-emerald-200">
+                                PRD
+                            </span>
                             <div className="space-y-1">
                                 <h1 className="text-2xl font-bold tracking-tight text-slate-900">
                                     Welcome back
