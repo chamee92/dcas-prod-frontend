@@ -135,8 +135,51 @@ export function formatPhoneNumberForApi(phone: string): string {
 }
 
 /**
- * Formats phone numbers for display.
- * If a phone number was saved with international +94 prefix, converts it back to local 0xxxxxxxxx format.
+ * Formats phone numbers for edit form fields.
+ * Ensures the number is shown with the country code (+94 for Sri Lanka)
+ * so users see the full international format and validation succeeds.
+ * Examples:
+ * - +94767897864 -> +94767897864  (already has country code, unchanged)
+ * - 94767897864  -> +94767897864  (add leading +)
+ * - 0767897864   -> +94767897864  (local SL format -> international)
+ * - 767897864    -> +94767897864  (9-digit SL -> international)
+ * - +447911123456 -> +447911123456 (non-SL international, unchanged)
+ */
+export function formatPhoneNumberForEdit(phone?: string | null): string {
+  if (!phone) return "";
+  const clean = phone.trim().replace(/[\s\-\(\)]/g, "");
+  if (!clean) return "";
+
+  // Already has a + prefix — keep as-is
+  if (clean.startsWith("+")) return clean;
+
+  // 94XXXXXXXXX (11 digits, no +) -> +94XXXXXXXXX
+  if (clean.startsWith("94") && clean.length === 11) {
+    return "+" + clean;
+  }
+
+  // 0XXXXXXXXX (10 digits, local SL) -> +94XXXXXXXXX
+  if (clean.startsWith("0") && clean.length === 10) {
+    return "+94" + clean.substring(1);
+  }
+
+  // 9-digit SL number (no leading 0, no country code) -> +94XXXXXXXXX
+  if (!clean.startsWith("0") && clean.length === 9) {
+    return "+94" + clean;
+  }
+
+  // International with 00 prefix (e.g. 0094...) -> +94...
+  if (clean.startsWith("0094")) {
+    return "+" + clean.substring(2);
+  }
+
+  // Fallback: return cleaned number
+  return clean;
+}
+
+/**
+ * Formats phone numbers for display (read-only views).
+ * Converts international +94 prefix back to local 0xxxxxxxxx format for readability.
  * Examples:
  * - +94767897864 -> 0767897864
  * - 94767897864 -> 0767897864
