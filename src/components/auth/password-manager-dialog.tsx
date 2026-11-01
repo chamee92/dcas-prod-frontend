@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { Loader2, KeyRound } from "lucide-react";
 import { api } from "@/lib/api-client";
 
@@ -137,23 +138,23 @@ export function PasswordManagerDialog() {
                     </div>
                     <div className="space-y-1.5">
                         <label className="text-xs font-semibold text-slate-700">New Password *</label>
-                        <Input
-                            type="password"
+                        <PasswordInput
                             placeholder="••••••••"
                             value={newPassword}
                             onChange={(e) => setNewPassword(e.target.value)}
                             required
+                            disabled={loading}
                             className="h-9 text-sm"
                         />
                     </div>
                     <div className="space-y-1.5">
                         <label className="text-xs font-semibold text-slate-700">Confirm New Password *</label>
-                        <Input
-                            type="password"
+                        <PasswordInput
                             placeholder="••••••••"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             required
+                            disabled={loading}
                             className="h-9 text-sm"
                         />
                     </div>

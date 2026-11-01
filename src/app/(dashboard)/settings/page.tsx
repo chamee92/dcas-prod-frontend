@@ -20,7 +20,7 @@ import { Trash2, Plus, Camera, Loader2, CheckCircle2, AlertCircle, ShieldAlert, 
 import { PasswordInput } from "@/components/ui/password-input";
 import { ImageCropDialog } from "@/components/ui/image-crop-dialog";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
-import { formatPhoneNumberForApi, validatePhoneNumber } from "@/lib/utils";
+import { formatPhoneNumberForApi, formatPhoneNumberForEdit, validatePhoneNumber } from "@/lib/utils";
 
 interface Service {
     id: string;
@@ -52,7 +52,7 @@ export default function SettingsPage() {
         if (user) {
             setFullName(user.full_name || "");
             setNicNumber(user.nic_number || "");
-            setContactNumber(user.contact_number || user.phone || "");
+            setContactNumber(formatPhoneNumberForEdit(user.contact_number || user.phone || ""));
             setEmailAddress(user.email_address || user.email || "");
             setCurrentAddress(user.current_address || "");
             setPermanentAddress(user.permanent_address || "");
@@ -522,10 +522,13 @@ export default function SettingsPage() {
                                             id="phone"
                                             value={contactNumber}
                                             onChange={e => setContactNumber(e.target.value)}
-                                            placeholder="e.g. 0771234567 or +94771234567"
+                                            placeholder="+94771234567"
                                             maxLength={20}
                                             required
                                         />
+                                        <p className="text-[10px] text-slate-400 mt-0.5">
+                                            Include country code (e.g. +94 for Sri Lanka)
+                                        </p>
                                     </div>
                                     <div className="space-y-1.5">
                                         <Label htmlFor="email" className="text-sm font-semibold text-gray-700">Email Address *</Label>
@@ -853,6 +856,7 @@ export default function SettingsPage() {
                                         value={currentPassword}
                                         onChange={e => setCurrentPassword(e.target.value)}
                                         required
+                                        disabled={isChangingPassword}
                                     />
                                 </div>
                                 <div className="space-y-1.5">
@@ -863,6 +867,7 @@ export default function SettingsPage() {
                                         value={newPassword}
                                         onChange={e => setNewPassword(e.target.value)}
                                         required
+                                        disabled={isChangingPassword}
                                     />
                                 </div>
                                 <div className="space-y-1.5">
@@ -873,6 +878,7 @@ export default function SettingsPage() {
                                         value={confirmPassword}
                                         onChange={e => setConfirmPassword(e.target.value)}
                                         required
+                                        disabled={isChangingPassword}
                                     />
                                 </div>
 
